@@ -158,10 +158,6 @@ public  class  WatchService {
         datastoreEncoder.setUser(hashMaps.get("USER"));
         datastoreEncoder.setPassword(String.valueOf(hashMaps.get("PW")));
 
-        //Shapefile setting
-        hashMaps = (HashMap<String, String>) yamlMaps.get("Shapefile");
-        shapefile = new Shapefile(hashMaps.get("SRS"),hashMaps.get("Style"));
-
         //CSVfile setting
         hashMaps = (HashMap<String, String>) yamlMaps.get("CSVfile");
 //        xlsConverter = new xlsToCsvConverter(Integer.parseInt(String.valueOf(hashMaps.get("row"))),Integer.parseInt(String.valueOf(hashMaps.get("col"))));
