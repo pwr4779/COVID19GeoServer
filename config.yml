@@ -1,0 +1,40 @@
+#Dir path
+Dir:
+  path: D:\github\COVID19\COVID19GeoServer\COVID19-DATA\
+
+#Geosever Setting
+Geoserver:
+  URL: http://localhost:8080/geoserver
+  ID: admin
+  PW: geoserver
+  Workspace: TestWorkspace
+
+#Geoserver Postgis connection Setting
+GeoseverPostgis:
+  DataStore: PostGIS
+  Host: localhost
+  Port: 5432
+  Database: geoserverdb
+  Schema: public
+  USER: postgres
+  PW: 1234
+
+#Postgresql Setting
+Postgresql:
+  URL: jdbc:postgresql://localhost:5432/geoserverdb
+  USER: postgres
+  PW: 1234
+
+#Shapefile publish Setting
+Shapefile:
+  SRS: EPSG:20000
+  Style: polygon
+
+#CSVfile
+CSVfile:
+  row: 4
+  col: 1
+
+#lat/lon CSVfile path
+latlon:
+  path: D:\github\COVID19\COVID19GeoServer\COVID19-DATA\LatLon.csv
