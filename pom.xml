@@ -137,9 +137,17 @@
             <version>1.18.12</version>
         </dependency>
 
-
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.13.1</version>
+            </dependency>
     </dependencies>
     <repositories>
+        <repository>
+            <id>Central Repository</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
         <repository>
             <id>OpenCSV</id>
             <url>	http://opencsv.sf.net</url>
