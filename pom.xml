@@ -54,6 +54,13 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>it.geosolutions</groupId>
@@ -131,10 +138,11 @@
             <artifactId>opencsv</artifactId>
             <version>1.8</version>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
+            <version>1.18.10</version>
         </dependency>
 
             <dependency>
@@ -191,6 +199,7 @@
             <name>Java.net repository</name>
             <url>https://repo1.maven.org/maven2/</url>
         </repository>
+
     </repositories>
     <build>
         <plugins>

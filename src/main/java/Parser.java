@@ -15,6 +15,7 @@ import java.util.Date;
 
 public class Parser {
     private Date nowDate;
+    private String dateStr;
     private WatchService watcher;
     public Parser(Date nowDate, WatchService watcher){
         try {
@@ -47,6 +48,7 @@ public class Parser {
 
             String[] day = date.split(" ");
             date = "2020-" +String.format("%02d", Integer.parseInt(day[0])) +"-"+ String.format("%02d", Integer.parseInt(day[1]));
+            dateStr = date;
             //System.out.println(date);
             SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
             Date coviddate = dt.parse(date);
@@ -74,12 +76,19 @@ public class Parser {
         String[] info = data.split(" ");
         BufferedWriter bufWriter = null;
         try{
-            bufWriter = Files.newBufferedWriter(Paths.get(watcher.getDirPath()), Charset.forName("UTF-8"));
+            //bufWriter = Files.newBufferedWriter(Paths.get(watcher.getDirPath()), Charset.forName("UTF-8"));
+            bufWriter = Files.newBufferedWriter(Paths.get("D:\\test.csv"), Charset.forName("UTF-8"));
             bufWriter.write("날짜,지역,확진환자수");
             bufWriter.newLine();
 
-            for(int i = 0; i<10; i++){
-                bufWriter.write("날짜,지역,확진환자수");
+            for(int i = 0; i<17; i++){
+                StringBuilder sb = new StringBuilder();
+                sb.append(dateStr);
+                sb.append(",");
+                sb.append(city(i));
+                sb.append(",");
+                sb.append(info[i+3]);
+                bufWriter.write(sb.toString());
                 bufWriter.newLine();
             }
 
@@ -97,5 +106,63 @@ public class Parser {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String city(int i){
+        String cityname = null;
+        switch(i){
+            case 0:
+                cityname = "서울";
+                break;
+            case 1:
+                cityname = "부산";
+                break;
+            case 2:
+                cityname = "대구";
+                break;
+            case 3:
+                cityname = "인천";
+                break;
+            case 4:
+                cityname = "광주";
+                break;
+            case 5:
+                cityname = "대전";
+                break;
+            case 6:
+                cityname = "울산";
+                break;
+            case 7:
+                cityname = "세종";
+                break;
+            case 8:
+                cityname = "경기";
+                break;
+            case 9:
+                cityname = "강원";
+                break;
+            case 10:
+                cityname = "충북";
+                break;
+            case 11:
+                cityname = "충남";
+                break;
+            case 12:
+                cityname = "전북";
+                break;
+            case 13:
+                cityname = "전남";
+                break;
+            case 14:
+                cityname = "경북";
+                break;
+            case 15:
+                cityname = "경남";
+                break;
+            case 16:
+                cityname = "제주";
+                break;
+        }
+        return   cityname;
     }
 }
