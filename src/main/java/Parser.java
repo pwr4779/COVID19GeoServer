@@ -3,17 +3,23 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Parser {
     private Date nowDate;
-
-    public Parser(Date nowDate){
+    private WatchService watcher;
+    public Parser(Date nowDate, WatchService watcher){
         try {
             this. nowDate = nowDate;
+            this.watcher = watcher;
             getList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,5 +66,36 @@ public class Parser {
         Element tr = tbody.select("tr").get(2);
         Elements td = tr.select("td");
         System.out.println(td.text());
+        createCSV(td.text());
+    }
+
+    public void createCSV(String data){
+        //출력 스트림 생성
+        String[] info = data.split(" ");
+        BufferedWriter bufWriter = null;
+        try{
+            bufWriter = Files.newBufferedWriter(Paths.get(watcher.getDirPath()), Charset.forName("UTF-8"));
+            bufWriter.write("날짜,지역,확진환자수");
+            bufWriter.newLine();
+
+            for(int i = 0; i<10; i++){
+                bufWriter.write("날짜,지역,확진환자수");
+                bufWriter.newLine();
+            }
+
+
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(bufWriter != null){
+                    bufWriter.close();
+                }
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 }

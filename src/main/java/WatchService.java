@@ -37,7 +37,7 @@ public  class  WatchService {
     private GeoServerRESTPublisher publisher;
     private PostgresqlDB postgresqldb;
     private GSPostGISDatastoreEncoder datastoreEncoder;
-    private Shapefile shapefile;
+    //private Shapefile shapefile;
     private String converterPath;
     private String DatastoreName;
     private xlsToCsvConverter xlsConverter;
@@ -186,33 +186,33 @@ public  class  WatchService {
                     break;
             }
         }else if(file.isDirectory()) {
-            System.out.println(file.getName() + "is Directory");
-            File dir = new File(path.toAbsolutePath().toString());
-            File[] fileList = dir.listFiles();
-            File subfile = null;
-            try{
-                boolean shpcheck = false;
-                boolean geotiffcheck = false;
-                for(int i = 0 ; i < fileList.length ; i++){
-
-                    subfile = fileList[i];
-                    if(subfile.isFile() && (subfile.getName()).contains(".shp")){
-                        // shapefile exist
-                        System.out.println("shp exist");
-                        shpcheck = true;
-                    }
-                    if(subfile.isFile() && (subfile.getName()).contains(".geotiffcheck")){
-                        // shapefile exist
-                        System.out.println("geotiff exist");
-                        shpcheck = true;
-                    }
-                }
-                if(shpcheck && !geotiffcheck) {
-                    boolean result = shapefile.zipshapefile(publisher, Workspace, subfile, null);
-                }
-                return;
-            }catch(IOException e){
-            }
+//            System.out.println(file.getName() + "is Directory");
+//            File dir = new File(path.toAbsolutePath().toString());
+//            File[] fileList = dir.listFiles();
+//            File subfile = null;
+//            try{
+//                boolean shpcheck = false;
+//                boolean geotiffcheck = false;
+//                for(int i = 0 ; i < fileList.length ; i++){
+//
+//                    subfile = fileList[i];
+//                    if(subfile.isFile() && (subfile.getName()).contains(".shp")){
+//                        // shapefile exist
+//                        System.out.println("shp exist");
+//                        shpcheck = true;
+//                    }
+//                    if(subfile.isFile() && (subfile.getName()).contains(".geotiffcheck")){
+//                        // shapefile exist
+//                        System.out.println("geotiff exist");
+//                        shpcheck = true;
+//                    }
+//                }
+//                if(shpcheck && !geotiffcheck) {
+//                    boolean result = shapefile.zipshapefile(publisher, Workspace, subfile, null);
+//                }
+//                return;
+//            }catch(IOException e){
+//            }
         }
     }
 
