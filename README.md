@@ -13,7 +13,7 @@ GeoServer,Postgresql,PostGIS install & Config Setting
 ### import latlon data table result
 ![latlon](./img/latlon.JPG)
 ### import covid19data table result
-![covid19data](./img/covid19data.JPG)
+![covid19table](./img/covid19table.JPG)
 ### import view(latlon table and covid19data join) result
 ![view](./img/view.JPG)
 
