@@ -16,11 +16,11 @@ import java.util.Date;
 public class Parser {
     private Date nowDate;
     private String dateStr;
-    private WatchService watcher;
-    public Parser(Date nowDate, WatchService watcher){
+    private String  dirPath;
+    public Parser(Date nowDate, String dirPath){
         try {
             this. nowDate = nowDate;
-            this.watcher = watcher;
+            this.dirPath = dirPath;
             getList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,9 +75,10 @@ public class Parser {
         //출력 스트림 생성
         String[] info = data.split(" ");
         BufferedWriter bufWriter = null;
+        String filedate = dateStr.replace("-","");
         try{
-            //bufWriter = Files.newBufferedWriter(Paths.get(watcher.getDirPath()), Charset.forName("UTF-8"));
-            bufWriter = Files.newBufferedWriter(Paths.get("D:\\test.csv"), Charset.forName("UTF-8"));
+            bufWriter = Files.newBufferedWriter(Paths.get(dirPath+"COVID19_"+filedate+".csv"), Charset.forName("UTF-8"));
+            //bufWriter = Files.newBufferedWriter(Paths.get("D:\\test.csv"), Charset.forName("UTF-8"));
             bufWriter.write("날짜,지역,확진환자수");
             bufWriter.newLine();
 

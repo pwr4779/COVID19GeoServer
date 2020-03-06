@@ -105,7 +105,7 @@ public class PostgresqlDB {
         }
 
         String fileName = file.getName();
-        String sql = "copy " + tableName + " FROM stdin DELIMITER ',' CSV header  encoding 'UTF8'";
+        String sql = "copy " + tableName + " FROM stdin DELIMITER ',' CSV header  encoding 'UTF-8'";
         BaseConnection pgcon = (BaseConnection) con;
         CopyManager mgr = new CopyManager(pgcon);
         try {

@@ -15,10 +15,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.*;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 //import it.geosolutions.geobatch.actions.ds2ds.dao.FeatureConfiguration;
@@ -45,7 +44,6 @@ public  class  WatchService {
 //    private String layer;
 
     public void init() throws IOException {
-
         //GeoServer Init
         configInit();
         String RESTURL  = geoserver.getURL();
@@ -54,6 +52,7 @@ public  class  WatchService {
         manager = new GeoServerRESTManager(new URL(RESTURL), RESTUSER, RESTPW);
         reader = new GeoServerRESTReader(RESTURL, RESTUSER, RESTPW);
         publisher = new GeoServerRESTPublisher(RESTURL, RESTUSER, RESTPW);
+
         boolean created = manager.getStoreManager().create(geoserver.getWorkspace(), datastoreEncoder); //geoserver - PostGis connect create store
         System.out.println("PostGisDB초기만들기:"+created);
         try {
@@ -61,6 +60,7 @@ public  class  WatchService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
         //watchService 생성
         prop = System.getProperties();
@@ -125,6 +125,14 @@ public  class  WatchService {
             }
         });
         thread.start();
+        String nowdate = "2020-03-05";
+        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date now = transFormat.parse(nowdate);
+            Parser a = new Parser(now, dirPath);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public void configInit() throws FileNotFoundException {
@@ -221,7 +229,9 @@ public  class  WatchService {
         System.out.println("POSTGIS");
         boolean created = manager.getStoreManager().create(geoserver.getWorkspace(), datastoreEncoder); //geoserver - PostGis connect create store
         //boolean ok = manager.getPublisher().publishDBLayer(WorkspaceName, datastoreName,fte,layerEncoder);
-       boolean ok = manager.getPublisher().publishDBLayer(geoserver.getWorkspace() , datastoreName, tableName ,"EPSG:4326","point");
+        System.out.println(tableName);
+        tableName = tableName.toLowerCase();
+       boolean ok = manager.getPublisher().publishDBLayer(geoserver.getWorkspace() , datastoreName, tableName ,"EPSG:4326","COVID19");
         System.out.println("publish:"+ok);
     }
 
